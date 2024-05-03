@@ -1,5 +1,6 @@
 package com.hcc.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,28 +11,36 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name="users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cohortStartDate")
+    @Column(name = "cohort_start_date")
     private LocalDate cohortStartDate;
 
     @Column(name = "username")
     private String username;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
-    public User() {}
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
+    private List<Authority> authorities;
+    // constructors
+    public User() { }
 
     public User(LocalDate cohortStartDate, String username, String password) {
         this.cohortStartDate = cohortStartDate;
         this.username = username;
         this.password = password;
     }
+
+
+    // getters and setters
 
     public Long getId() {
         return id;
@@ -49,23 +58,6 @@ public class User implements UserDetails {
         this.cohortStartDate = cohortStartDate;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -89,8 +81,31 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new Authority("role_student"));
-        return roles;
+//        List<GrantedAuthority> roles = new ArrayList<>(Arrays.asList(authorities));
+
+        return authorities;
     }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

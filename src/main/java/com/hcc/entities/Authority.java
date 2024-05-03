@@ -11,13 +11,18 @@ public class Authority implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "authority")
     private String authority;
 
-    @ManyToOne
+    @ManyToOne(optional=false)
     private User user;
 
-    public Authority() {}
+
+    public Authority() { }
+
+    public Authority(String authority, User user) {
+        this.authority = authority;
+        this.user = user;
+    }
 
     public Authority(String authority) {
         this.authority = authority;
@@ -31,6 +36,7 @@ public class Authority implements GrantedAuthority {
         this.id = id;
     }
 
+    @Override
     public String getAuthority() {
         return authority;
     }
