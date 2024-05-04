@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 
 @Repository
-public interface AssignemtnRepository extends JpaRepository<Assignment, Long> {
+public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
     Set<Assignment> findByUser(User user);
 }

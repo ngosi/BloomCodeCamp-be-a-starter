@@ -38,7 +38,7 @@ public class AuthController {
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION, token)
-                    .body(user.getUsername());
+                    .body(token);
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

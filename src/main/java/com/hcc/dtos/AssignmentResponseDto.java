@@ -1,5 +1,6 @@
 package com.hcc.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hcc.entities.Assignment;
 import com.hcc.enums.AssignmentEnum;
 import com.hcc.enums.AssignmentStatusEnum;
@@ -17,6 +18,7 @@ public class AssignmentResponseDto {
         this.assignment = assignment;
     }
 
+    @JsonIgnore
     public Assignment getAssignment() {
         return assignment;
     }
@@ -25,6 +27,7 @@ public class AssignmentResponseDto {
         this.assignment = assignment;
     }
 
+    @JsonIgnore
     public AssignmentEnum[] getAssignmentEnums() {
         return assignmentEnums;
     }

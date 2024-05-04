@@ -22,7 +22,7 @@ public class UserDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Hello from the dat loader!");
+        System.out.println("Hello from the data loader!");
         loadUserData();
         loadAuthorityData();
     }
