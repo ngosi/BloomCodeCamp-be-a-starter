@@ -32,7 +32,7 @@ public class UserDataLoader implements CommandLineRunner {
             PasswordEncoder pwenc = new BCryptPasswordEncoder();
             String pw = pwenc.encode("asdfasdf");
 
-            User learner = new User(LocalDate.now(), "leaner1", pw);
+            User learner = new User(LocalDate.now(), "learner1", pw);
             User reviewer = new User(LocalDate.now(), "reviewer1", pw);
             userRepository.save(learner);
             userRepository.save(reviewer);

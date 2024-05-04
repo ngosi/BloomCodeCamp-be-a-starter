@@ -15,28 +15,35 @@ public class Assignment {
     @Column(name = "number")
     private Integer number;
 
-    @Column(name = "githubUrl")
+    @Column(name = "github_url")
     private String githubUrl;
 
     @Column(name = "branch")
     private String branch;
 
-    @Column(name = "reviewVideoUrl")
-    private String reviewVideoUrl;
+    @Column(name = "code_review_video_url")
+    private String codeReviewVideoUrl;
 
-    @Column(name = "user")
+    @ManyToOne(optional = false)
     private User user;
 
-    public Assignment() {}
+    @ManyToOne
+    private User codeReviewer;
 
-    public Assignment(String status, Integer number, String githubUrl, String branch, String reviewVideoUrl, User user) {
+
+    // constructors
+    public Assignment() { }
+
+    public Assignment(String status, Integer number, String githubUrl, String branch, String codeReviewVideoUrl, User user) {
         this.status = status;
         this.number = number;
         this.githubUrl = githubUrl;
         this.branch = branch;
-        this.reviewVideoUrl = reviewVideoUrl;
+        this.codeReviewVideoUrl = codeReviewVideoUrl;
         this.user = user;
     }
+
+    // getters and setters
 
     public Long getId() {
         return id;
@@ -58,7 +65,7 @@ public class Assignment {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setUmber(Integer number) {
         this.number = number;
     }
 
@@ -78,12 +85,16 @@ public class Assignment {
         this.branch = branch;
     }
 
-    public String getReviewVideoUrl() {
-        return reviewVideoUrl;
+    public String getCodeReviewVideoUrl() {
+        return codeReviewVideoUrl;
     }
 
-    public void setReviewVideoUrl(String reviewVideoUrl) {
-        this.reviewVideoUrl = reviewVideoUrl;
+    public void setCodeReviewVideoUrl(String codeReviewVideoUrl) {
+        this.codeReviewVideoUrl = codeReviewVideoUrl;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public User getUser() {
@@ -92,5 +103,13 @@ public class Assignment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getCodeReviewer() {
+        return codeReviewer;
+    }
+
+    public void setCodeReviewer(User codeReviewer) {
+        this.codeReviewer = codeReviewer;
     }
 }
